@@ -12,9 +12,10 @@
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
+            overflow: hidden; /* Prevent scrollbars from appearing */
         }
 
         .github-link {
@@ -36,10 +37,45 @@
             left: 20px;
             font-size: 14px;
         }
+
+        .draggable {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: grab;
+        }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
     </style>
 </head>
 <body>
     <a href="https://carrilho.xyz" class="github-link">Enter</a>
     <div class="footer">© 2005 - 2024 Leandro Carrilho</div>
+    <img src="https://github.com/user-attachments/assets/6f454899-fc50-439d-8dc6-69d66f3a8421" alt="lc-setas-logo" class="draggable" id="draggableImage">
+
+    <script>
+        const img = document.getElementById('draggableImage');
+
+        img.addEventListener('mousedown', (e) => {
+            const offsetX = e.clientX - img.getBoundingClientRect().left;
+            const offsetY = e.clientY - img.getBoundingClientRect().top;
+
+            const mouseMoveHandler = (e) => {
+                img.style.left = `${e.clientX - offsetX}px`;
+                img.style.top = `${e.clientY - offsetY}px`;
+            };
+
+            const mouseUpHandler = () => {
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mouseup', mouseUpHandler);
+            };
+
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+        });
+    </script>
 </body>
 </html>
