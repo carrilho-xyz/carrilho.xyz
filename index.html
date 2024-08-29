@@ -12,10 +12,28 @@
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: space-between;
+            align-items: flex-start;
             height: 100vh;
-            overflow: hidden; 
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .links {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            line-height: 2;
+        }
+
+        .links a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
         }
 
         .github-link {
@@ -37,44 +55,35 @@
             left: 20px;
             font-size: 14px;
         }
-
-        .draggable {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            cursor: grab;
-        }
-
-        .draggable:active {
-            cursor: grabbing;
-        }
     </style>
 </head>
 <body>
-    <a href="https://carrilho.xyz" class="github-link"></a>
+    <div class="links">
+        <a href="https://design.carrilho.xyz">./design</a><br>
+        <a href="https://dev.carrilho.xyz">./dev</a><br>
+        <a href="https://cv.carrilho.xyz">./curriculum</a>
+    </div>
+    <a href="https://carrilho.xyz" class="github-link" id="enter-link">Entrar</a>
     <div class="footer">© 2005 - 2024 Leandro Carrilho</div>
-  
+
     <script>
-        const img = document.getElementById('draggableImage');
+        const languages = [
+            "Entrar", // Português
+            "Enter",  // Inglês
+            "Ingresar", // Espanhol
+            "Eintreten", // Alemão
+            "入る", // Japonês
+            "进入", // Chinês
+            "Войти", // Russo
+            "Entrer"  // Francês
+        ];
+        let currentIndex = 0;
+        const enterLink = document.getElementById('enter-link');
 
-        img.addEventListener('mousedown', (e) => {
-            const offsetX = e.clientX - img.getBoundingClientRect().left;
-            const offsetY = e.clientY - img.getBoundingClientRect().top;
-
-            const mouseMoveHandler = (e) => {
-                img.style.left = `${e.clientX - offsetX}px`;
-                img.style.top = `${e.clientY - offsetY}px`;
-            };
-
-            const mouseUpHandler = () => {
-                document.removeEventListener('mousemove', mouseMoveHandler);
-                document.removeEventListener('mouseup', mouseUpHandler);
-            };
-
-            document.addEventListener('mousemove', mouseMoveHandler);
-            document.addEventListener('mouseup', mouseUpHandler);
-        });
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % languages.length;
+            enterLink.textContent = languages[currentIndex];
+        }, 2000);
     </script>
 </body>
 </html>
