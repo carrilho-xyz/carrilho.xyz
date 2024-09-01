@@ -3,138 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>carrilho.xyz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Khula:wght@400;700&display=swap" rel="stylesheet">
+    <title>Site em Manutenção</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: url('https://github.com/user-attachments/assets/5a0091a7-08b9-417c-ab50-5fcba47e1e79') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
-            font-family: 'Khula', sans-serif;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #message {
+            font-size: 24px;
             text-align: center;
-            height: 100vh;
-        }
-
-        h1 {
-            font-size: 4em;
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .clocks {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-
-        .clock {
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .clock time {
-            font-size: 2em;
-            display: block;
-        }
-
-        .clock span {
-            font-size: 1em;
-            text-transform: uppercase;
-            margin-top: 10px;
-            display: block;
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            font-size: 14px;
-        }
-
-        .top-right {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            font-weight: 700;
         }
     </style>
 </head>
 <body>
-    <div class="top-right"></div>
 
-    <h1 id="welcome-text">BEM-VINDO</h1>
-    
-    <div class="clocks">
-        <div class="clock">
-            <time id="lisbon-time">00:00</time>
-            <span>LISBOA</span>
-        </div>
-        <div class="clock">
-            <time id="tokyo-time">00:00</time>
-            <span>TOKYO</span>
-        </div>
-        <div class="clock">
-            <time id="ny-time">00:00</time>
-            <span>NEW YORK</span>
-        </div>
-        <div class="clock">
-            <time id="sf-time">00:00</time>
-            <span>SAN FRANCISCO</span>
-        </div>
-        <div class="clock">
-            <time id="rio-time">00:00</time>
-            <span>RIO DE JANEIRO</span>
-        </div>
-    </div>
-    
-    <div class="footer">© 2005 - 2024 Leandro Carrilho</div>
+    <div id="message">Em Manutenção</div>
 
     <script>
-        const welcomeLanguages = [
-            "BEM-VINDO", // Português
-            "WELCOME",  // Inglês
-            "BIENVENIDO", // Espanhol
-            "WILLKOMMEN", // Alemão
-            "ようこそ", // Japonês
-            "欢迎", // Chinês
-            "Добро пожаловать", // Russo
-            "BIENVENUE"  // Francês
+        const messages = [
+            "Em Manutenção",   // Português
+            "Under Maintenance", // Inglês
+            "En Mantenimiento",  // Espanhol
+            "Instandhaltung",    // Alemão
+            "保守中",             // Japonês
+            "维护中",             // Chinês
+            "В Ремонте",         // Russo
+            "En Maintenance"     // Francês
         ];
-        
-        let currentWelcomeIndex = 0;
 
-        const welcomeText = document.getElementById('welcome-text');
+        let currentMessageIndex = 0;
 
-        setInterval(() => {
-            currentWelcomeIndex = (currentWelcomeIndex + 1) % welcomeLanguages.length;
-            welcomeText.textContent = welcomeLanguages[currentWelcomeIndex];
-        }, 4000);
-
-        function updateClock(elementId, offset) {
-            const now = new Date();
-            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-            const localTime = new Date(utc + (3600000 * offset));
-            const hours = String(localTime.getHours()).padStart(2, '0');
-            const minutes = String(localTime.getMinutes()).padStart(2, '0');
-            document.getElementById(elementId).textContent = `${hours}:${minutes}`;
+        function changeMessage() {
+            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+            document.getElementById('message').textContent = messages[currentMessageIndex];
         }
 
-        function updateClocks() {
-            updateClock('lisbon-time', 0);
-            updateClock('tokyo-time', 9);
-            updateClock('ny-time', -4);
-            updateClock('sf-time', -7);
-            updateClock('rio-time', -3);
-        }
-
-        setInterval(updateClocks, 1000);
-        updateClocks();  // Initial call to set the time immediately
+        setInterval(changeMessage, 2000); // Muda a mensagem a cada 2 segundos
     </script>
+
 </body>
 </html>
