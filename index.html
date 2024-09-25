@@ -1,53 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARRILHO.XYZ</title>
+    <title>Página Preta</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000000;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
         }
-
-        #message {
-            font-size: 24px;
-            text-align: center;
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-
-    <div id="message">Em Manutenção</div>
-
-    <script>
-        const messages = [
-            "Em Manutenção",   // Português
-            "Under Maintenance", // Inglês
-            "En Mantenimiento",  // Espanhol
-            "Instandhaltung",    // Alemão
-            "保守中",             // Japonês
-            "维护中",             // Chinês
-            "В Ремонте",         // Russo
-            "En Maintenance"     // Francês
-        ];
-
-        let currentMessageIndex = 0;
-
-        function changeMessage() {
-            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-            document.getElementById('message').textContent = messages[currentMessageIndex];
-        }
-
-        setInterval(changeMessage, 2000); 
-    </script>
-
+    <div class="footer">
+        2024 Leandro Carrilho XYZ
+    </div>
 </body>
 </html>
