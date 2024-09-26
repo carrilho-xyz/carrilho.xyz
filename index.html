@@ -1,28 +1,105 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hello@carrilho.xyz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 80;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #111;
+            background-image: url('https://github.com/user-attachments/assets/82bc572e-0436-477c-b5e9-0420450a22ea');
+            background-size: cover;
+            background-position: center;
+            color: #777;
+            display: flex;
+            justify-content: center;
+            align-items: margin-left;
             height: 100vh;
-            background-color: black;
+            flex-direction: column; 
+            text-align: margin-left;
+        }
+
+        .menu-container {
+            text-align: left;
+            width: 15%;
+        }
+
+        .menu-container a {
+            text-decoration: none;
+            color: #777;
+            display: block;
+            font-size: 14px; 
+            margin-bottom: 40px;
+            font-weight: 800; 
+            transition: color 0.3s ease;
+        }
+
+        .menu-container a:hover {
             color: white;
-            font-family: Arial, sans-serif;
         }
-        .footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding: 10px;
+
+        .name {
+            color: #777;
+            font-size: 14px;
+            font-weight: 800; 
+            line-height: 1.2;
+            margin-bottom: 20px;
         }
+
+        .highlight {
+            color: white;
+            font-size: 14px;
+            font-weight: 800; 
+            margin-bottom: 30px;
+            cursor: pointer; 
+        }
+
+        .highlight:hover {
+            color: #d0e0e3; 
+        }
+
+        .welcome-message {
+            display: none; 
+            color: white;
+            font-size: 14px;
+	    font-weight: 800;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="footer">
-        © 2024 Leandro Carrilho - XYZ
+   
+    <div class="menu-container">
+        <div class="name">LEANDRO<br>CARRILHO</div> 
+        <div class="highlight" onclick="login()">LOGIN</div> 
+        <a href="#" class="menu" id="about-link"></a>
     </div>
+
+    <div class="welcome-message" id="welcomeMessage">HELLO@CARRILHO.XYZ</div> 
+
+    <script>
+        function login() {
+            var password = prompt("Enter Password");
+            var correctPassword = "password"; 
+
+            if (password === correctPassword) {
+                alert("mhm"); 
+                document.getElementById("welcomeMessage").style.display = "block"; 
+                document.querySelector(".menu-container").style.display = "none"; 
+            } else {
+                alert("nah"); 
+            }
+        }
+    </script>
+
 </body>
 </html>
