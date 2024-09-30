@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <style>
         * {
-            margin: 80;
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
@@ -20,30 +20,15 @@
             background-position: center;
             color: #777;
             display: flex;
-            justify-content: center;
-            align-items: margin-left;
+            justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+            align-items: center; /* Alinha verticalmente ao centro */
             height: 100vh;
-            flex-direction: column; 
-            text-align: margin-left;
+            padding-left: 20px; /* Adiciona espaço à esquerda */
         }
 
         .menu-container {
             text-align: left;
             width: 15%;
-        }
-
-        .menu-container a {
-            text-decoration: none;
-            color: #777;
-            display: block;
-            font-size: 14px; 
-            margin-bottom: 40px;
-            font-weight: 800; 
-            transition: color 0.3s ease;
-        }
-
-        .menu-container a:hover {
-            color: white;
         }
 
         .name {
@@ -66,25 +51,40 @@
             color: #d0e0e3; 
         }
 
-        .welcome-message {
+        .hidden-message {
             display: none; 
             color: white;
             font-size: 14px;
-	    font-weight: 800;
+            font-weight: 800;
             margin-top: 20px;
         }
 
+        .text-button {
+            color: #777;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            cursor: pointer;
+            text-align: left;
+            transition: color 0.3s ease;
+        }
+
+        .text-button:hover {
+            color: white;
+        }
     </style>
 </head>
 <body>
-   
     <div class="menu-container">
         <div class="name">LEANDRO<br>CARRILHO</div> 
         <div class="highlight" onclick="login()">LOGIN</div> 
-        <a href="#" class="menu" id="about-link"></a>
     </div>
 
-    <div class="welcome-message" id="welcomeMessage">HELLO@CARRILHO.XYZ</div> 
+    <div id="hiddenContent" class="hidden-message">
+        <div class="text-button" onclick="openPhotosPage()">PHOTOS / FOTOS</div>
+        <div class="text-button" onclick="alert('Navigating to XR / AR / VR')">XR / AR / VR</div>
+        <div class="text-button" onclick="alert('Navigating to DESIGN')">DESIGN</div>
+    </div>
 
     <script>
         function login() {
@@ -93,13 +93,16 @@
 
             if (password === correctPassword) {
                 alert("mhm"); 
-                document.getElementById("welcomeMessage").style.display = "block"; 
+                document.getElementById("hiddenContent").style.display = "block"; 
                 document.querySelector(".menu-container").style.display = "none"; 
             } else {
                 alert("nah"); 
             }
         }
-    </script>
 
+        function openPhotosPage() {
+            window.location.href = "photos.html"; // Mudar para a página de fotos
+        }
+    </script>
 </body>
 </html>
