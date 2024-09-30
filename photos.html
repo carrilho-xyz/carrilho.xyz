@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111;
+            background-image: url('https://github.com/user-attachments/assets/82bc572e-0436-477c-b5e9-0420450a22ea');
+            background-size: cover;
+            background-position: center;
+            color: #777;
+            display: flex;
+            justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+            align-items: center; /* Alinha verticalmente ao centro */
+            height: 100vh;
+            padding-left: 20px; /* Adiciona espaço à esquerda */
+        }
+
+        .menu-container {
+            text-align: left;
+            width: 15%;
+        }
+
+        .name {
+            color: #777;
+            font-size: 14px;
+            font-weight: 800; 
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: white;
+            font-size: 14px;
+            font-weight: 800; 
+            margin-bottom: 30px;
+            cursor: pointer; 
+        }
+
+        .highlight:hover {
+            color: #d0e0e3; 
+        }
+
+        .photo-list {
+            color: white;
+            font-size: 14px;
+            font-weight: 800;
+            margin-top: 20px;
+        }
+
+        .photo-item {
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .photo-item:hover {
+            color: #d0e0e3;
+        }
+
+        /* Custom Image Slider Styles */
+        .custom-image-slider {
+            position: relative;
+            display: none; /* Initially hidden */
+            border-radius: 40;
+            width: 100%;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 100%; /* Adjust this value according to your image aspect ratio */
+        }
+
+        .slider-before,
+        .slider-after {
+            position: absolute;
+            width: 100%;
+            display: block;
+            top: 0;
+            left: 0;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background-color: #fff;
+            cursor: ew-resize;
+        }
+
+        .slider-handle::before,
+        .slider-handle::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            cursor: ew-resize;
+            transition: all 0.2s ease-out;
+        }
+
+        .slider-handle::before {
+            left: -24px;
+            border-right: 16px solid #fff;
+        }
+
+        .slider-handle::after {
+            right: -24px;
+            border-left: 16px solid #fff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="name">PHOTOS</div> 
+        <div class="photo-list">
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/fba077cb-892b-450a-afd9-3bcf9e6c5ebd','https://github.com/user-attachments/assets/cba4b656-5506-4a41-8441-170a51da9863')">Photo 1</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/c8252abb-7587-494c-ab71-03312cad3db8','https://github.com/user-attachments/assets/002ba355-070b-45ad-a847-910bda0c83fe')">Photo 2</div>
+        </div>
+    </div>
+
+    <div class="custom-image-slider" id="customImageSlider">
+        <img class="slider-before" id="sliderBefore" src="" alt="Before">
+        <img class="slider-after" id="sliderAfter" src="" alt="After">
+        <div class="slider-handle"></div>
+    </div>
+
+    <script>
+        function openSlider(beforeImageUrl, afterImageUrl) {
+            document.getElementById("sliderBefore").src = beforeImageUrl;
+            document.getElementById("sliderAfter").src = afterImageUrl;
+            document.getElementById("customImageSlider").style.display = "block"; // Show the slider
+
+            // Set initial handle position and clipPath
+            const initialPercentage = 50;
+            document.querySelector(".slider-handle").style.left = `${initialPercentage}%`;
+            document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - initialPercentage}% 0 0)`;
+
+            let dragging = false;
+            let lastX = 0;
+
+            // Add mouse event listeners
+            document.querySelector(".slider-handle").addEventListener("mousedown", (e) => {
+                dragging = true;
+                lastX = e.clientX;
+                e.preventDefault();
+            });
+
+            document.addEventListener("mouseup", () => {
+                dragging = false;
+            });
+
+            document.addEventListener("mouseleave", () => {
+                dragging = false;
+            });
+
+            document.addEventListener("mousemove", (e) => {
+                if (!dragging) return;
+
+                const rect = document.getElementById("customImageSlider").getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                let widthPercentage = (x / rect.width) * 100;
+
+                // Add constraint to keep the handle within 1% of either edge
+                widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+                // Update handle position using requestAnimationFrame
+                window.requestAnimationFrame(() => {
+                    document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
+                    document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+                });
+
+                lastX = x;
+            });
+        }
+
+        // For touch devices
+        document.querySelector(".slider-handle").addEventListener("touchstart", (e) => {
+            dragging = true;
+            lastX = e.touches[0].clientX;
+            e.preventDefault();
+        });
+
+        document.addEventListener("touchend", () => {
+            dragging = false;
+        });
+
+        document.getElementById("customImageSlider").addEventListener("touchmove", (e) => {
+            if (!dragging) return;
+
+            const rect = document.getElementById("customImageSlider").getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            let widthPercentage = (x / rect.width) * 100;
+
+            // Add constraint to keep the handle within 1% of either edge
+            widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+            // Update handle position using requestAnimationFrame
+            window.requestAnimationFrame(() => {
+                document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
+                document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+            });
+
+            lastX = x;
+        });
+    </script>
+</body>
+</html>
