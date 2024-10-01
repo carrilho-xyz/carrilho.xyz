@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hello@carrilho.xyz</title>
+    <title>leandro</title>
     <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -15,15 +15,15 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #111;
-            background-image: url('https://github.com/user-attachments/assets/82bc572e-0436-477c-b5e9-0420450a22ea');
+            background-image: url('https://github.com/user-attachments/assets/2410a247-197a-49b7-ac5a-a32f63315b38');
             background-size: cover;
             background-position: center;
             color: #777;
             display: flex;
-            justify-content: flex-start; /* Alinha o conteúdo à esquerda */
-            align-items: center; /* Alinha verticalmente ao centro */
+            justify-content: flex-start; 
+            align-items: center; 
             height: 100vh;
-            padding-left: 20px; /* Adiciona espaço à esquerda */
+            padding-left: 20px; 
         }
 
         .menu-container {
@@ -76,31 +76,21 @@
 </head>
 <body>
     <div class="menu-container">
-        <div class="name">LEANDRO<br>CARRILHO</div> 
-        <div class="highlight" onclick="login()">LOGIN</div> 
+      
+        <div class="highlight">LEANDRO<br>CARRILHO</div>
+        <div class="text-button" onclick="mailto:hello@carrilho.xyz">SAY HI</div>
+
     </div>
 
-    <div id="hiddenContent" class="hidden-message">
-        <div class="text-button" onclick="openPhotosPage()"></div>
-        <div class="text-button" onclick="alert('Navigating to XR / AR / VR')"></div>
-        <div class="text-button" onclick="alert('Navigating to DESIGN')"></div>
-        
-
     <script>
-        function login() {
-            var password = prompt("Enter Password");
-            var correctPassword = "password"; 
-
-            if (password === correctPassword) {
-                alert("mhm"); 
-                document.getElementById("hiddenContent").style.display = "block"; 
-                document.querySelector(".menu-container").style.display = "none"; 
-            } else {
-                alert("nah"); 
-            }
-        }
-
+      
         function openPhotosPage() {
+            window.location.href = "photos.html"; 
+        }
+    </script>
+</body>
+</html>
+
             window.location.href = "photos.html"; // Mudar para a página de fotos
         }
     </script>
