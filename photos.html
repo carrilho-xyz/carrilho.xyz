@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,10 +20,10 @@
             background-position: center;
             color: #777;
             display: flex;
-            justify-content: flex-start; /* Alinha o conteúdo à esquerda */
-            align-items: center; /* Alinha verticalmente ao centro */
+            justify-content: flex-start;
+            align-items: center;
             height: 100vh;
-            padding-left: 20px; /* Adiciona espaço à esquerda */
+            padding-left: 20px;
         }
 
         .menu-container {
@@ -68,7 +68,6 @@
             color: #d0e0e3;
         }
 
-        /* Custom Image Slider Styles */
         .custom-image-slider {
             position: relative;
             display: none; /* Initially hidden */
@@ -150,55 +149,80 @@
 
     <script>
         function openSlider(beforeImageUrl, afterImageUrl) {
-            document.getElementById("sliderBefore").src = beforeImageUrl;
-            document.getElementById("sliderAfter").src = afterImageUrl;
-            document.getElementById("customImageSlider").style.display = "block"; // Show the slider
+            const sliderBefore = document.getElementById("sliderBefore");
+            const sliderAfter = document.getElementById("sliderAfter");
 
-            // Set initial handle position and clipPath
+            // Limpa e define os URLs das imagens quando um item é clicado
+            sliderBefore.src = ''; // Placeholder (se quiser adicionar um)
+            sliderAfter.src = ''; // Placeholder
+            sliderBefore.src = beforeImageUrl;
+            sliderAfter.src = afterImageUrl;
+
+            // Mostra o slider
+            document.getElementById("customImageSlider").style.display = "block"; 
+
+            // Define a posição inicial da alavanca
             const initialPercentage = 50;
             document.querySelector(".slider-handle").style.left = `${initialPercentage}%`;
             document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - initialPercentage}% 0 0)`;
 
             let dragging = false;
-            let lastX = 0;
+            let lastMoveTime = 0;
 
-            // Add mouse event listeners
+            // Eventos de mouse
             document.querySelector(".slider-handle").addEventListener("mousedown", (e) => {
                 dragging = true;
-                lastX = e.clientX;
                 e.preventDefault();
             });
 
-            document.addEventListener("mouseup", () => {
-                dragging = false;
-            });
-
-            document.addEventListener("mouseleave", () => {
-                dragging = false;
-            });
+            document.addEventListener("mouseup", () => dragging = false);
+            document.addEventListener("mouseleave", () => dragging = false);
 
             document.addEventListener("mousemove", (e) => {
                 if (!dragging) return;
+
+                const now = Date.now();
+                if (now - lastMoveTime < 16) return; // ~60fps
+                lastMoveTime = now;
 
                 const rect = document.getElementById("customImageSlider").getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 let widthPercentage = (x / rect.width) * 100;
 
-                // Add constraint to keep the handle within 1% of either edge
-                widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+                widthPercentage =
+                Math.max(0, Math.min(100, widthPercentage)); // Limitar entre 0% e 100%
 
-                // Update handle position using requestAnimationFrame
-                window.requestAnimationFrame(() => {
-                    document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
-                    document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
-                });
+                document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
+                document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+            });
+
+            // Eventos de toque (para mobile)
+            document.querySelector(".slider-handle").addEventListener("touchstart", (e) => {
+                dragging = true;
+                e.preventDefault();
+            });
+
+            document.addEventListener("touchend", () => dragging = false);
+            document.addEventListener("touchcancel", () => dragging = false);
+
+            document.addEventListener("touchmove", (e) => {
+                if (!dragging) return;
+
+                const now = Date.now();
+                if (now - lastMoveTime < 16) return; // ~60fps
+                lastMoveTime = now;
+
+                const rect = document.getElementById("customImageSlider").getBoundingClientRect();
+                const x = e.touches[0].clientX - rect.left;
+                let widthPercentage = (x / rect.width) * 100;
+
+                widthPercentage = Math.max(0, Math.min(100, widthPercentage));
+
+                document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
+                document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
             });
         }
     </script>
 </body>
 </html>
 
-        });
-    </script>
-</body>
-</html>
