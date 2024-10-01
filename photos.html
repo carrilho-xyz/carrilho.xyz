@@ -72,11 +72,11 @@
         .custom-image-slider {
             position: relative;
             display: none; /* Initially hidden */
-            border-radius: 40;
-            width: 100%;
+            border-radius: 80;
+            width: 60%;
             overflow: hidden;
             height: 0;
-            padding-bottom: 100%; /* Adjust this value according to your image aspect ratio */
+            padding-bottom: 60%; /* Adjust this value according to your image aspect ratio */
         }
 
         .slider-before,
@@ -127,10 +127,18 @@
 </head>
 <body>
     <div class="menu-container">
-        <div class="name">PHOTOS</div> 
+        <div class="name">FOTOS</div> 
         <div class="photo-list">
-            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/fba077cb-892b-450a-afd9-3bcf9e6c5ebd','https://github.com/user-attachments/assets/cba4b656-5506-4a41-8441-170a51da9863')">Photo 1</div>
-            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/c8252abb-7587-494c-ab71-03312cad3db8','https://github.com/user-attachments/assets/002ba355-070b-45ad-a847-910bda0c83fe')">Photo 2</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/cba4b656-5506-4a41-8441-170a51da9863','https://github.com/user-attachments/assets/fba077cb-892b-450a-afd9-3bcf9e6c5ebd')">Foto 1</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/002ba355-070b-45ad-a847-910bda0c83fe','https://github.com/user-attachments/assets/c8252abb-7587-494c-ab71-03312cad3db8')">Foto 2</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/ca0dd4fa-18c3-4c55-b9d9-31bbf01b2b65','https://github.com/user-attachments/assets/d359f3eb-62b8-4f9d-a385-eb7f566e6618')">Foto 3</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/e191544e-7930-464e-a203-a6c2e7d27170','https://github.com/user-attachments/assets/72779eed-edc1-4351-8c5f-7d12ceb403c9')">Foto 4</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/d0eafc08-e686-4c3e-a7cd-3b1097a5f629','https://github.com/user-attachments/assets/745d974a-63b0-4594-81e8-9b41aae6bf6f')">Foto 5</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/6f04c6dd-9870-4246-b685-5f5c91527d5b','https://github.com/user-attachments/assets/bf8cedd8-b2f0-4f68-a1d2-787cd4c574f5')">Foto 6</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/2f15dab5-d12e-4f4f-9e0e-2cdc2637659c','https://github.com/user-attachments/assets/0426e54a-4036-4de0-a574-c16c93624154')">Foto 7</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/fb2113bb-fa2a-49e2-b0ad-c0cf710b7dae','https://github.com/user-attachments/assets/4c54385d-b60c-4281-b215-011d6131a032')">Foto 8</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/f6616454-9ff8-461b-9f46-698541da2b31','https://github.com/user-attachments/assets/1f7f11fd-6cd2-41c9-8114-3f1bf19f428b')">Foto 9</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/sample10-before','https://github.com/user-attachments/assets/sample10-after')">Foto 10</div>
         </div>
     </div>
 
@@ -184,39 +192,12 @@
                     document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
                     document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
                 });
-
-                lastX = x;
             });
         }
+    </script>
+</body>
+</html>
 
-        // For touch devices
-        document.querySelector(".slider-handle").addEventListener("touchstart", (e) => {
-            dragging = true;
-            lastX = e.touches[0].clientX;
-            e.preventDefault();
-        });
-
-        document.addEventListener("touchend", () => {
-            dragging = false;
-        });
-
-        document.getElementById("customImageSlider").addEventListener("touchmove", (e) => {
-            if (!dragging) return;
-
-            const rect = document.getElementById("customImageSlider").getBoundingClientRect();
-            const x = e.touches[0].clientX - rect.left;
-            let widthPercentage = (x / rect.width) * 100;
-
-            // Add constraint to keep the handle within 1% of either edge
-            widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
-
-            // Update handle position using requestAnimationFrame
-            window.requestAnimationFrame(() => {
-                document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
-                document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
-            });
-
-            lastX = x;
         });
     </script>
 </body>
