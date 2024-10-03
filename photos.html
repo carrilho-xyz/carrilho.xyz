@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,6 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #111;
-            background-image: url('');
             background-size: cover;
             background-position: center;
             color: #777;
@@ -70,12 +69,12 @@
 
         .custom-image-slider {
             position: relative;
-            display: none; /* Initially hidden */
+            display: none; 
             border-radius: 80;
             width: 60%;
             overflow: hidden;
             height: 0;
-            padding-bottom: 60%; /* Adjust this value according to your image aspect ratio */
+            padding-bottom: 80%; 
         }
 
         .slider-before,
@@ -126,7 +125,7 @@
 </head>
 <body>
     <div class="menu-container">
-        <div class="name">FOTOS</div> 
+        <div class="name">FOTOS<br>(Site em Manutencao)</div> 
         <div class="photo-list">
             <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/cba4b656-5506-4a41-8441-170a51da9863','https://github.com/user-attachments/assets/fba077cb-892b-450a-afd9-3bcf9e6c5ebd')">Foto 1</div>
             <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/002ba355-070b-45ad-a847-910bda0c83fe','https://github.com/user-attachments/assets/c8252abb-7587-494c-ab71-03312cad3db8')">Foto 2</div>
@@ -135,9 +134,10 @@
             <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/d0eafc08-e686-4c3e-a7cd-3b1097a5f629','https://github.com/user-attachments/assets/745d974a-63b0-4594-81e8-9b41aae6bf6f')">Foto 5</div>
             <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/6f04c6dd-9870-4246-b685-5f5c91527d5b','https://github.com/user-attachments/assets/bf8cedd8-b2f0-4f68-a1d2-787cd4c574f5')">Foto 6</div>
             <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/2f15dab5-d12e-4f4f-9e0e-2cdc2637659c','https://github.com/user-attachments/assets/0426e54a-4036-4de0-a574-c16c93624154')">Foto 7</div>
-            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/fb2113bb-fa2a-49e2-b0ad-c0cf710b7dae','https://github.com/user-attachments/assets/4c54385d-b60c-4281-b215-011d6131a032')">Foto 8</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/4c54385d-b60c-4281-b215-011d6131a032','ttps://github.com/user-attachments/assets/fb2113bb-fa2a-49e2-b0ad-c0cf710b7dae')">Foto 8</div>
             <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/f6616454-9ff8-461b-9f46-698541da2b31','https://github.com/user-attachments/assets/1f7f11fd-6cd2-41c9-8114-3f1bf19f428b')">Foto 9</div>
-            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/sample10-before','https://github.com/user-attachments/assets/sample10-after')">Foto 10</div>
+            <div class="photo-item" onclick="openSlider('https://github.com/user-attachments/assets/fb88ac26-0d83-4cbb-94d1-6deb44f3bedb','https://github.com/user-attachments/assets/a77b21f9-13b0-4be9-91c7-b4d4edccee13
+')">Foto 10</div>
         </div>
     </div>
 
@@ -221,6 +221,11 @@
                 document.querySelector(".slider-handle").style.left = `${widthPercentage}%`;
                 document.querySelector(".slider-after").style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
             });
+        }
+    </script>
+</body>
+</html>
+
         }
     </script>
 </body>
